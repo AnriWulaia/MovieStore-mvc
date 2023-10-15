@@ -1,0 +1,29 @@
+﻿@model IEnumerable<MovieStoreMvc.Models.Domain.Genre>
+@{
+}
+
+<h2>Genres</h2>
+<table class="table">
+
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Genre</th>
+            <th scope="col" class="ps-3">Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.Id</th>
+                <td>@item.GenreName</td>
+                <td>
+                    <a href="/Genre/Edit?id=@item.Id" class="btn btn-default"><i class="fa fa-edit"></i></a>
+                    <a href="/Genre/Delete?id=@item.Id" onclick="return window.confirm('Are you sure?')" class="btn btn-default"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

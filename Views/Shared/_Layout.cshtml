@@ -1,10 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string username = User.Identity.Name;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie store</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,34 +16,57 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" href="/images/movie_filter_FILL0_wght400_GRAD0_opsz48.svg">
     <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@500&display=swap" rel="stylesheet">
+
 </head>
 <body>
-    <nav class="nav-bar">
-        <div class="logo">
-            movie store
-        </div>
-        <ul class="nav-link">
-            <li><a class="active" href="/Home/Index">Home</a></li>
-            <li><a href="/Home/About">About</a></li>
-            <li>
-                <a href="#">Admin <i class="fa fa-caret-down"></i></a>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <a class="navbar-brand font-monospace" href="/Home">MOVIE STORE</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+                    <ul class="navbar-nav ">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/Home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/About">About</a>
+                        </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Admin
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item nav-link" href="/Genre/Add">Genre</a></li>
+                                    <li><a class="dropdown-item nav-link" href="#">Movie</a></li>
+                                    <li><a class="dropdown-item nav-link" href="#">Movie Details</a></li>
+                                    <li><a class="dropdown-item nav-link" href="/UserAuthentication/Logout">Logout</a></li>
+                                </ul>
+                            </li>
+                        }
+                        @if (string.IsNullOrEmpty(username))
+                        {
+                            <li class="nav-item"><a href="/UserAuthentication/Login" class="nav-link">Login</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
-                <ul class="dropdown-nav-link">
-                    <li><a href="/forms.html">Form</a></li>
-                    <li><a href="/table.html">Table</a></li>
-                    <li><a href="/movie-detail.html">Movie Detail</a></li>
-                    <li><a href="#">Link 4</a></li>
-                    <li><a href="#">Logout</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Login</a></li>
-        </ul>
-    </nav>
+    </div>
+    
     <div class="container renderHere">
         @RenderBody()
     </div>
     <footer>
         &#169; 2023 Anri
     </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js"></script>
 </body>
 </html>
