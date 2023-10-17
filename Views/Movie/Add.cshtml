@@ -1,0 +1,59 @@
+﻿@model MovieStoreMvc.Models.Domain.Movie
+@{
+
+}
+<link rel="stylesheet" href="/css/forms.css">
+
+<form class="w-75" method="post" asp-action="Add" enctype="multipart/form-data">
+    <h2 class="pb-10">Add Movie</h2>
+    <div class="form-floating">
+        <input asp-for="Title" class="form-control" aria-required="true" />
+        <label asp-for="Title" class="form-label"></label>
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div>
+        <input asp-for="ImageFile" type="file" class="form-control" aria-required="true" />
+        <span asp-validation-for="ImageFile" class="text-danger"></span>
+    </div>
+
+    <div >
+        <label asp-for="Genres" class="form-label"></label>
+        <select asp-for="Genres" class="form-select" asp-items="Model.GenreList" aria-required="true" multiple>
+            <option value="">--Select--</option>
+        </select>
+
+        <span asp-validation-for="Genres" class="text-danger"></span>
+    </div>
+      
+    <div class="form-floating">
+        <input asp-for="ReleaseYear" type="number" class="form-control" aria-required="true" />
+        <label asp-for="ReleaseYear" class="form-label"></label>
+        <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+    </div>
+
+    <div class="form-floating">
+        <input asp-for="Cast" class="form-control" aria-required="true" />
+        <label asp-for="Cast" class="form-label"></label>
+        <span asp-validation-for="Cast" class="text-danger"></span>
+    </div>
+
+    <div class="form-floating">
+        <input asp-for="Director" class="form-control" aria-required="true" />
+        <label asp-for="Director" class="form-label"></label>
+        <span asp-validation-for="Director" class="text-danger"></span>
+    </div>
+
+    
+    @if (TempData["msg"] != null)
+    {
+        <div class="alert-primary p-3 mt-2">
+            @TempData["msg"]
+        </div>
+    }
+
+    <div class="input-container">
+        <button class="btn btn-sec mt-2" type="submit">Add</button>
+        <a class="btn btn-sec mt-2" href="/Movie/MovieList">All Records</a>
+    </div>
+</form>

@@ -1,0 +1,38 @@
+﻿@model MovieStoreMvc.Models.DTO.MovieListVm
+
+<table>
+    <caption>Movies</caption>
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Image</th>
+            <th scope="col">Release Year</th>
+            <th scope="col">Cast</th>
+            <th scope="col">Director</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.MovieList)
+        {
+            <tr>
+                <td scope="row" data-label="Title">@item.Title</td>
+                <td style="word-wrap:break-word" data-label="Genre">@item.GenreNames</td>
+                <td data-label="Image"><img src="/Uploads/@item.MovieImage" style="width: 100px; height:auto;" /></td>
+                <td data-label="Release Year">@item.ReleaseYear</td>
+                <td data-label="Cast">@item.Cast</td>
+                <td data-label="Director">@item.Director</td>
+                <td data-label="Action">
+                    <a href="/Genre/Edit?id=@item.Id" class="btn btn-default"><i class="fa fa-edit"></i></a>
+                    <a href="/Genre/Delete?id=@item.Id" onclick="return window.confirm('Are you sure?')" class="btn btn-default"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+

@@ -11,24 +11,26 @@ html, body, .container-fluid {
     margin: 0;
     padding: 0;
 }
-.container{
-    overflow:visible;
+
+.container {
+    overflow: visible;
 }
+
 .navbar {
     position: relative;
     padding-top: 15px;
     padding-bottom: 15px
 }
 
-.navbar::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    bottom: -5px;
-    height: 4px;
-    background-color: #100d0d;
-    width: 100%; /* Set the width to the viewport width */
-}
+    .navbar::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        bottom: -5px;
+        height: 4px;
+        background-color: #100d0d;
+        width: 100%; /* Set the width to the viewport width */
+    }
 
 .navbar-brand {
     font-size: 25px;
@@ -45,6 +47,47 @@ html, body, .container-fluid {
     font-weight: 500 !important;
 }
 
+
+
+
+
+table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+}
+
+caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+    caption-side: top;
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    font-family: "Open Sans", sans-serif;
+    letter-spacing: 5px;
+}
+
+table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+}
+
+table th,
+table td {
+    padding: .625em;
+    text-align: center;
+}
+
+table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
 
 
 .search-bar {
@@ -215,4 +258,50 @@ footer {
     .movie-card {
         flex-basis: 96%;
     }
+}
+
+
+@media screen and (max-width: 600px) {
+    table {
+        border: 0;
+    }
+
+        table caption {
+            font-size: 1.3em;
+        }
+
+        table thead {
+            border: none;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+
+        table tr {
+            border-bottom: 3px solid #ddd;
+            display: block;
+            margin-bottom: .625em;
+        }
+
+        table td {
+            border-bottom: 1px solid #ddd;
+            display: block;
+            font-size: .8em;
+            text-align: right;
+        }
+
+            table td::before {
+                content: attr(data-label);
+                float: left;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+
+            table td:last-child {
+                border-bottom: 0;
+            }
 }

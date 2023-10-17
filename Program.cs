@@ -17,6 +17,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 //builder.Services.ConfigureApplicationCookie(options => options.LoginPath = "/UserAuthentication/Login");
 builder.Services.AddScoped<IUserAuthenticationService, UserAuthenticationService>();
 builder.Services.AddScoped<IGenreService, GenreService>();
+builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IMovieService, MovieService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

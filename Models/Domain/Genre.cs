@@ -7,6 +7,7 @@ namespace MovieStoreMvc.Models.Domain
     {
         public int Id { get; set; }
         [Required]
+        [Display(Name = "Genre Name")]
         public string? GenreName { get; set; }
     }
 }
