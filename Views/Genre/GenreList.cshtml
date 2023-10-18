@@ -18,7 +18,7 @@
         {
             <tr>
                 <th scope="row">@item.Id</th>
-                <td>@item.GenreName</td>
+                <td data-label="Genre">@item.GenreName</td>
                 <td>
                     <a href="/Genre/Edit?id=@item.Id" class="btn btn-default"><i class="fa fa-edit"></i></a>
                     <a href="/Genre/Delete?id=@item.Id" onclick="return window.confirm('Are you sure?')" class="btn btn-default"><i class="fa fa-trash"></i></a>
@@ -27,3 +27,7 @@
         }
     </tbody>
 </table>
+
+<div class="mt-2">
+    <a href="/Genre/Add" class="btn btn-warning">Back</a>
+</div>

@@ -24,19 +24,19 @@ namespace MovieStoreMvc.Repositories.Implementation
 
                 // Check the allowed extenstions
                 var ext = Path.GetExtension(imageFile.FileName);
-                var allowedExtensions = new string[] { ".jpg", ".png", ".jpeg" };
+                var allowedExtensions = new string[] { ".jpg", ".png", ".jpeg", ".jfif"};
                 if (!allowedExtensions.Contains(ext))
                 {
-                    string msg = string.Format("Only {0} extensions are allowed", string.Join(",", allowedExtensions));
+                    string msg = string.Format("Only {0} extensions are allowed", string.Join(" ", allowedExtensions));
                     return new Tuple<int, string>(0, msg);
                 }
 
                 //checking size
                 long fileSizeInBytes = imageFile.Length;
                 double fileSizeInMB = (double)fileSizeInBytes / (1024 * 1024); // Convert to megabytes
-                if (fileSizeInMB > 20)
+                if (fileSizeInMB > 10)
                 {
-                    return new Tuple<int, string>(0, "File size exceeds the maximum allowed (20 MB).");
+                    return new Tuple<int, string>(0, "File size exceeds the maximum allowed (10 MB).");
                 }
                 string uniqueString = Guid.NewGuid().ToString();
                 //create a unique filename here

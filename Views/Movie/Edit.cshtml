@@ -1,19 +1,62 @@
-﻿@model MovieStoreMvc.Models.Domain.Genre
+﻿@model MovieStoreMvc.Models.Domain.Movie
 @{
+
 }
+<link rel="stylesheet" href="/css/forms.css">
 
+<form class="w-75" method="post" asp-action="Edit" enctype="multipart/form-data">
+    <input type="hidden" class="input" asp-for="Id" />
+    <input type="hidden" class="input" asp-for="MovieImage" />
 
-<form class="w-75" method="post" asp-action="Update">
-    <h2 class="pb-10">Update Genre</h2>
-    <input type="hidden" class="form-control" asp-for="Id" />
-    <div class="form-floating mt-4">
-        <input asp-for="GenreName" class="form-control" aria-required="true" />
-        <label asp-for="GenreName" class="form-label"></label>
-        <span asp-validation-for="GenreName" class="text-danger"></span>
+    <h2 class="pb-10">Update Movie</h2>
+    <div class="form-floating">
+        <input asp-for="Title" class="form-control" aria-required="true" />
+        <label asp-for="Title" class="form-label"></label>
+        <span asp-validation-for="Title" class="text-danger"></span>
     </div>
 
-    <div class="input-container mt-2">
-        <button class="btn btn-warning" type="submit">Save</button>
-        <a class="btn btn-primary" href="/Genre/GenreList">All Records</a>
+    <div>
+        <input asp-for="ImageFile" type="file" class="form-control" aria-required="true" />
+        <span asp-validation-for="ImageFile" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Genres" class="form-label"></label>
+        <select asp-for="Genres" class="form-select" asp-items="Model.MultiGenreList" aria-required="true" multiple>
+            <option value="">--Select--</option>
+        </select>
+
+        <span asp-validation-for="Genres" class="text-danger"></span>
+    </div>
+
+    <div class="form-floating">
+        <input asp-for="ReleaseYear" type="number" class="form-control" aria-required="true" />
+        <label asp-for="ReleaseYear" class="form-label"></label>
+        <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+    </div>
+
+    <div class="form-floating">
+        <input asp-for="Cast" class="form-control" aria-required="true" />
+        <label asp-for="Cast" class="form-label"></label>
+        <span asp-validation-for="Cast" class="text-danger"></span>
+    </div>
+
+    <div class="form-floating">
+        <input asp-for="Director" class="form-control" aria-required="true" />
+        <label asp-for="Director" class="form-label"></label>
+        <span asp-validation-for="Director" class="text-danger"></span>
+    </div>
+
+
+    @if (TempData["msg"] != null)
+    {
+        <div class="alert-primary p-3 mt-2">
+            @TempData["msg"]
+        </div>
+    }
+
+    <div class="input-container">
+        <button class="btn btn-sec mt-2" type="submit">Update</button>
+        <a class="btn btn-sec mt-2" href="/Movie/MovieList">All Records</a>
     </div>
 </form>
