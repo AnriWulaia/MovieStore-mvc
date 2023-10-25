@@ -32,6 +32,8 @@ namespace MovieStoreMvc.Models.Domain
 
         [NotMapped]
         public MultiSelectList? MultiGenreList { get; set; }
+        [NotMapped]
+        public string? VideoUrl { get; set; }
 
     }
 }

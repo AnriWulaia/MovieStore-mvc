@@ -1,151 +1,44 @@
-﻿@{
-    
+﻿@model MovieStoreMvc.Models.DTO.MovieListVm
+@{
+    ViewData["Title"] = "Home";
 }
-<section class="search-bar">
-    <form>
-        <input type="text" placeholder="search here">
+<section class="search-bar ms-3">
+    <form method="get" asp-action="Index">
+        <input type="text" name="term" placeholder="search here">
         <button type="submit"><i class="fa fa-search"></i></button>
     </form>
 </section>
-<section class="movies">
-    <div class="movie-card">
-        <div class="movie-image">
-            <img src="https://picsum.photos/id/1/200/300">
-        </div>
-        <div class="movie-info">
-            <h4>Movie 1</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
+<section class="movies mt-3">
 
-    <div class="movie-card">
-        <div class="movie-image">
-            <img src="https://picsum.photos/id/237/200/300">
+    @foreach (var movie in Model.MovieList)
+    {
+        <div class="card mb-4 ms-3" style="width: 18rem;">
+            <img class="card-img-top" src="/Uploads/@movie.MovieImage" alt="Movie Image" style="width: 100%; aspect-ratio: 3/4;">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">@movie.Title</h5>
+                <p class="card-text">Release Year: @movie.ReleaseYear</p>
+                <p class="card-text">Director: @movie.Director</p>
+                <div class="text-center mt-auto">
+                    <a href="/Home/MovieDetails?id=@movie.Id" class="btn btn-primary  button-details">More Details</a>
+                </div>
+            </div>
         </div>
-        <div class="movie-info">
-            <h4>Movie 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-
-    <div class="movie-card">
-        <div class="movie-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="movie-info">
-            <h4>Movie 3</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max,anna, ralph, dorian </h4>
-            <h4>director 1,director 2,director 3</h4>
-        </div>
-    </div>
-
-
-    <div class="movie-card">
-        <div class="movie-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="movie-info">
-            <h4>Movie 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-
-    <div class="movie-card">
-        <div class="movie-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="movie-info">
-            <h4>Movie 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-
-    <div class="movie-card">
-        <div class="movie-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="movie-info">
-            <h4>Movie 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-
-    <div class="movie-card">
-        <div class="movie-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="movie-info">
-            <h4>Movie 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-
-    <div class="movie-card">
-        <div class="movie-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="movie-info">
-            <h4>Movie 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-
-
-    <div class="movie-card">
-        <div class="movie-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="movie-info">
-            <h4>Movie 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-
-    <div class="movie-card">
-        <div class="movie-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="movie-info">
-            <h4>Movie 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
+    }
 
 </section>
 
 <div class="pagination">
-    <a href="#">&laquo;</a>
-    <a href="#">1</a>
-    <a class="active" href="#">2</a>
-    <a href="#">3</a>
-    <a href="#">4</a>
-    <a href="#">5</a>
-    <a href="#">6</a>
-    <a href="#">&raquo;</a>
+
+    @for (int i = 1; i <= Model.TotalPages; i++)
+    {
+        if (i == Model.CurrentPage)
+        {
+            <a href="/Home/Index?currentPage=@i&term=@Model.Term" class="active">@i</a>
+        }
+        else
+        {
+            <a href="/Home/Index?currentPage=@i&term=@Model.Term">@i </a>
+        }
+    }
+
 </div>

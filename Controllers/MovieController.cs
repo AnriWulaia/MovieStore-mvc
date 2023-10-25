@@ -21,7 +21,11 @@ namespace MovieStoreMvc.Controllers
         public IActionResult Add()
         {
             var model = new Movie();
-            model.GenreList = _genreService.List().Select(a => new SelectListItem { Text = a.GenreName, Value = a.Id.ToString() });
+            //ordered genres
+            model.GenreList = _genreService.List()
+            .OrderBy(a => a.GenreName)
+            .Select(a => new SelectListItem { Text = a.GenreName, Value = a.Id.ToString() });
+
             return View(model);
         }
 
@@ -65,7 +69,7 @@ namespace MovieStoreMvc.Controllers
         {
             var model = _movieService.GetById(id);
             var selectedGenres = _movieService.GetGenreByMovieId(model.Id);
-            MultiSelectList multiGenreList = new MultiSelectList(_genreService.List(), "Id", "GenreName", selectedGenres);
+            MultiSelectList multiGenreList = new MultiSelectList(_genreService.List().OrderBy(a => a.GenreName), "Id", "GenreName", selectedGenres);
             model.MultiGenreList = multiGenreList;
             return View(model);
         }

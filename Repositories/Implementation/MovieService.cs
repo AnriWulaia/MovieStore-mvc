@@ -67,9 +67,28 @@ namespace MovieStoreMvc.Repositories.Implementation
             return ctx.Movie.Find(id);
         }
 
-        public MovieListVm List()
+        public MovieListVm List(string term="", bool paging=false, int currentPage = 0 )
         {
+            var data = new MovieListVm();
             var list = ctx.Movie.ToList();
+
+
+            if (!string.IsNullOrEmpty(term))
+            {
+                term = term.ToLower();
+                list = list.Where(a => a.Title.ToLower().StartsWith(term)).ToList();
+            }
+            if (paging)
+            {
+                //paging
+                int pageSize = 8;
+                int count = list.Count();
+                int totalPages = (int)(Math.Ceiling(count / (double)pageSize));
+                list = list.Skip((currentPage - 1)*pageSize).Take(pageSize).ToList();
+                data.PageSize = pageSize;
+                data.CurrentPage = currentPage;
+                data.TotalPages = totalPages;
+            }
             foreach (var movie in list)
             {
                 var genres = (from genre in ctx.Genre
@@ -81,13 +100,25 @@ namespace MovieStoreMvc.Repositories.Implementation
                 var genreNames = string.Join("\n", genres);
                 movie.GenreNames = genreNames;
             }
-            var data = new MovieListVm
-            {
-                MovieList = list.AsQueryable()
-            };
+            data.MovieList = list.AsQueryable();
             return data;
         }
-
+        public string GenreList(int id)
+        {
+            var list = ctx.Movie.ToList();
+            string genreNames = "";
+            foreach (var movie in list)
+            {
+                var genres = (from genre in ctx.Genre
+                              join mg in ctx.MovieGenre
+                              on genre.Id equals mg.GendreId
+                              where mg.MovieId == id
+                              select genre.GenreName
+                              ).ToList();
+                genreNames = string.Join(", ", genres);
+            }
+            return genreNames;
+        }
         public bool Update(Movie model)
         {
             try

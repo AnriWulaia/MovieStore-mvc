@@ -1,11 +1,16 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
+using MovieStoreMvc.Controllers;
 using MovieStoreMvc.Models.Domain;
 using MovieStoreMvc.Repositories.Abstract;
 using MovieStoreMvc.Repositories.Implementation;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .Build();
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -19,6 +24,8 @@ builder.Services.AddScoped<IUserAuthenticationService, UserAuthenticationService
 builder.Services.AddScoped<IGenreService, GenreService>();
 builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IMovieService, MovieService>();
+
+builder.Services.AddMemoryCache();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
