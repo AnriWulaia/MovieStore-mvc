@@ -49,6 +49,11 @@ namespace MovieStoreMvc.Controllers
                 var imageName = fileResult.Item2;
                 model.MovieImage = imageName;
             }
+            else
+            {
+                TempData["msg"] = "Image is required";
+                return View(model);
+            }
 
             var result = _movieService.Add(model);
             if (result)

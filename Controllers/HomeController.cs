@@ -24,8 +24,9 @@ namespace MovieStoreMvc.Controllers
 
             apiKey = _configuration["ApiKeys:MyApiKey"];
         }
-        
-        public IActionResult Index(string term="", int currentPage = 1)
+        [Route("")]
+        [Route("Home")]
+        public IActionResult Index(int currentPage = 1, string term = "")
         {
             var movies = _movieService.List(term, true,currentPage);
             return View(movies);

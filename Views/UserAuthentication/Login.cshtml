@@ -19,7 +19,7 @@
 
     @if (TempData["msg"] != null)
     {
-        <div class="alert mt-2">
+        <div class="alert-warning p-3 mt-2">
             @TempData["msg"]
         </div>
     }
@@ -27,4 +27,10 @@
     <div class="input-container">
         <button class="btn btn-sec mt-2" type="submit">Login</button>
     </div>
+
+    <h5 style="color:dimgray">
+        username: admin<br />
+        password: Admin123!
+
+    </h5>
 </form>

@@ -143,6 +143,7 @@ table th {
 .pagination {
     display: flex;
     justify-content: right;
+    flex-wrap:wrap;
 }
 
 .pagination a {
@@ -391,6 +392,10 @@ footer {
     .detail-container {
         padding: 0 !important;
     }
+
+    .pagination a {
+        padding: 8px 12px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -443,4 +448,6 @@ footer {
     table td:last-child {
         border-bottom: 0;
     }
+
+
 }

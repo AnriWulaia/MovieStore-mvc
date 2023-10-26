@@ -1,6 +1,6 @@
-﻿const currentURL = window.location.href;
+﻿var currentURL = window.location.href;
 
-const navLinks = document.querySelectorAll('.navbar li a');
+var navLinks = document.querySelectorAll('.navbar li a');
 navLinks.forEach(link => {
 
     if (link.href === currentURL) {
@@ -9,3 +9,5 @@ navLinks.forEach(link => {
         link.classList.remove('active');
     }
 });
+
+

@@ -27,7 +27,7 @@ namespace MovieStoreMvc.Repositories.Implementation
             if (userExists != null)
             {
                 status.StatusCode = 0;
-                status.Message = "User already exist";
+                status.Message = "User already exists";
                 return status;
             }
             ApplicationUser user = new ApplicationUser()

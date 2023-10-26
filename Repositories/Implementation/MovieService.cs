@@ -101,6 +101,7 @@ namespace MovieStoreMvc.Repositories.Implementation
                 movie.GenreNames = genreNames;
             }
             data.MovieList = list.AsQueryable();
+            data.Term = term;
             return data;
         }
         public string GenreList(int id)

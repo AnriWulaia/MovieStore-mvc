@@ -17,7 +17,7 @@ namespace MovieStoreMvc.Controllers
             {
                 Email = "admin@gmail.com",
                 Username = "admin",
-                Name = "Ravi",
+                Name = "Anri",
                 Password = "Admin123!",
                 PasswordConfirm = "Admin123!",
                 Role = "Admin"
